@@ -1,12 +1,29 @@
 <template>
     <div>
-        <h2>13123</h2>
+        <div :class="UserFun" id="UserPage" v-if="UserFun == 'Check'">
+            <UserCheck></UserCheck>
+        </div>
+        <div :class="UserFun" id="UserPage" v-else-if="UserFun == 'Map'">
+            <UserMap></UserMap>
+        </div>
     </div>
 </template>
 
 <script>
+    import UserCheck from './UserCheck'
+    import UserMap from './UserMap'
     export default {
-        
+        name:'UserPage',
+        components: {
+            UserCheck,
+            UserMap
+        },
+        data() {
+            return {
+                
+            }
+        },
+        props: ['UserFun']
     }
 </script>
 

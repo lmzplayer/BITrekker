@@ -1,4 +1,41 @@
 <template>
+    <div>
+        <div id='BottomBar' v-if="Page == 'User'">
+            <button v-on:click="ChangeCheck">查询</button>
+            <button v-on:click="ChangeMap">地图</button>
+        </div>
+        <div id='BottomBar' v-else-if="Page == 'Manager' && ManagerFun == 'CheckDelete'">
+            <button v-on:click="ChangeAddEdit">新增</button>
+            <button>删除</button>
+        </div>
+        <div id='BottomBar' v-else-if="Page == 'Manager' && ManagerFun == 'RecycleBin'">
+            <button>恢复</button>
+            <button>永久删除</button>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name:'BottomBar',
+        methods: {
+            ChangeMap() {
+                this.$emit('GetFun','Map')
+            },
+            ChangeCheck() {
+                this.$emit('GetFun','Check')
+            },
+            ChangeAddEdit() {
+                this.$emit('GetFun','AddEdit')
+            }
+        },
+        props: ['Page', 'UserFun', 'ManagerFun']
+    }
+</script>
+
+
+<!--
+    <template>
     <div :class="bottomContainer" v-if="hidden != true">
         <div v-if="pageStatus === 'user'">
             <button name="query" @click="clickQuery"><el-icon><House /></el-icon>查询</button>
@@ -62,3 +99,4 @@
         color: aqua;
     }
 </style>
+-->

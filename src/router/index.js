@@ -8,53 +8,93 @@ import RecycleBin from '../pages/RecycleBin'
 import MyHeader from '../components/MyHeader'
 import ManagerHeader from '../components/ManagerHeader'
 import ManagerPage from '../pages/ManagerPage'
-import UserPage from '../pages/userPage'
+import UserPage from '../pages/UserPage'
 
 export default new VueRouter({
     routes:[
         {
-            path:'/managerPage',
-            component:ManagerPage,
+            path:'/myHeader',
+            component:MyHeader,
             children:[
                 {
-                    path:'signIn',
-                    component:SignIn
+                    path:'managerPage',
+                    component:ManagerPage,
+                    children:[
+                        {
+                            path:'signIn',
+                            component:SignIn
+                        },
+                        {
+                            path:'addEdit',
+                            component:AddEdit
+                        },
+                        {
+                            path:'checkDelete',
+                            component:CheckDelete
+                        },
+                        {
+                            path:'recycleBin',
+                            component:RecycleBin
+                        }
+                    ]
                 },
                 {
-                    path:'addEdit',
-                    component:AddEdit
-                },
-                {
-                    path:'checkDelete',
-                    component:CheckDelete
-                },
-                {
-                    path:'recycleBin',
-                    component:RecycleBin
+                    path:'userPage',
+                    component:UserPage,
+                    children:[
+                        {
+                            path:'userMap',
+                            component:UserMap
+                        },
+                        {
+                            path:'userCheck',
+                            component:UserCheck
+                        },
+                    ]
                 }
             ]
         },
         {
-            path:'/userPage',
-            component:UserPage,
+            path:'/managerHeader',
+            component:ManagerHeader,
             children:[
                 {
-                    path:'userMap',
-                    component:UserMap
+                    path:'managerPage',
+                    component:ManagerPage,
+                    children:[
+                        {
+                            path:'signIn',
+                            component:SignIn
+                        },
+                        {
+                            path:'addEdit',
+                            component:AddEdit
+                        },
+                        {
+                            path:'checkDelete',
+                            component:CheckDelete
+                        },
+                        {
+                            path:'recycleBin',
+                            component:RecycleBin
+                        }
+                    ]
                 },
                 {
-                    path:'userCheck',
-                    component:UserCheck
-                },
+                    path:'userPage',
+                    component:UserPage,
+                    children:[
+                        {
+                            path:'userMap',
+                            component:UserMap
+                        },
+                        {
+                            path:'userCheck',
+                            component:UserCheck
+                        },
+                    ]
+                }
             ]
-        },
-        {
-            path:'/myHeader',
-            component:MyHeader
-        },
-        {
-            path:'/managerHeader',
-            component:ManagerHeader
         }
     ]
 })
