@@ -1,14 +1,12 @@
 <template>
     <div>
-        <div>
-            <h2>这是Manager页面</h2>
-        </div>
+        <h2>13123</h2>
     </div>
 </template>
 
 <script>
     export default {
-        name:'UserPage'
+        
     }
 </script>
 

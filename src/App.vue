@@ -1,22 +1,23 @@
 <template>
     <div>
-        <div>
-            <h2>head</h2>
-        </div>
-        <div>
-            <h2>head1</h2>
-            <UserPage></UserPage>
-            <h2>head2</h2>
-        </div>
+        <userPage></userPage>
+        <hr>
+        <MyBody></MyBody>
+        <hr>
+        <BottomBar></BottomBar>
     </div>
 </template>
 
 <script>
-    import UserPage from './pages/UserPage'
+    import userPage from './pages/userPage'
+    import BottomBar from './components/BottomBar'
+    import MyBody from './components/MyBody'
     export default {
         name:'App',
-        comments:{
-            UserPage
+        components:{
+            userPage,
+            BottomBar,
+            MyBody
         }
     }
 </script>

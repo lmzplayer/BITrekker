@@ -8,7 +8,7 @@ import RecycleBin from '../pages/RecycleBin'
 import MyHeader from '../components/MyHeader'
 import ManagerHeader from '../components/ManagerHeader'
 import ManagerPage from '../pages/ManagerPage'
-import UserPage from '../pages/UserPage'
+import UserPage from '../pages/userPage'
 
 export default new VueRouter({
     routes:[
@@ -49,11 +49,11 @@ export default new VueRouter({
             ]
         },
         {
-            path:'myHeader',
+            path:'/myHeader',
             component:MyHeader
         },
         {
-            path:'managerHeader',
+            path:'/managerHeader',
             component:ManagerHeader
         }
     ]
