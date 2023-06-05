@@ -28,6 +28,7 @@ export const getEditClassroom = (param) => get('/web_data_test/edit_classroom', 
 export const getRecycle = () => get('/html_control/recycle')
 export const getRecycleLabelLiist = () => get('/web_data_test/get_recycle_label_liist')
 export const getRecycleData = getMainData
+export const postRecoverClassroom = () => post('/web_data_test/recovery_classroom', param)
 
 //=test
 export const getUpdate = () => get('/web_data_test/update')
