@@ -104,6 +104,7 @@ export default{
     },
     methods:{
         send(){
+            this.$emit('GetChangeCheckDelete','CheckDelete')
             /* api 发送数据
             //console.log(this.requirement);
             var requirement_selected2=Object.values(this.requirement_selected)

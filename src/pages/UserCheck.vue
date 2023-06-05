@@ -1,6 +1,6 @@
 <template>
     <div>
-        <UserSelect></UserSelect>
+        <UserSelect v-bind:NowFun="NowFun"></UserSelect>
     </div>
     
 </template>
@@ -11,6 +11,11 @@
         name:'UserCheck',
         components:{
             UserSelect
+        },
+        data() {
+            return {
+                NowFun: 'UserCheck'
+            }
         }
     }
 </script>

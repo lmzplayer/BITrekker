@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="UserSelect">
         <el-row :gutter="20">
             <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
             <el-col :span="6"><div class="grid-content ep-bg-purple" />日期:</el-col>
@@ -12,7 +12,7 @@
             <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
             <el-col :span="6"><div class="grid-content ep-bg-purple" />教学楼：</el-col>
             <el-col :span="6"><div class="grid-content ep-bg-purple" />
-                <el-select v-model.lazy="building_selected">
+                <el-select v-model.lazy="building_selected"  multiple>
                     <el-option v-for="item in buildings" :value="item" :key="item"/>
                 </el-select>
             </el-col>
@@ -62,9 +62,15 @@ export default{
             class_type:'',
             FreeTime:['第1节','第2节','第3节','第4节','第5节','第6节','第7节','第8节','第9节','第10节','第11节','第12节','第13节'],
             FreeTime_selected:[],
-            requirement:['插座多','离水房近','离女厕近','离男厕近','空调课调节'],
+            requirement:['插座多','离水房近','离女厕近','离男厕近','空调可调节'],
             requirement_selected:[],
             other_requirement:'',
+            FilterResult:{
+                period: [],
+                date:"",
+                classroom_feature: [],
+                teaching_building: []
+            }
         }
     },
     mounted() {
@@ -75,8 +81,45 @@ export default{
         })
         */
     },
+    props: ['NowFun'],
     methods:{
         send(){
+            console.log(this.FreeTime_selected)
+            console.log(this.building_selected)
+            console.log(this.date_selected)
+            console.log(this.requirement_selected)
+            for(var i = 0; i < this.FreeTime.length; i++) {
+                var flag = false
+                for(var j = 0; j < this.FreeTime_selected.length; j++) {
+                    if(this.FreeTime[i] == this.FreeTime_selected[j]) {
+                        flag = true
+                    }
+                }
+                if(flag == true) {
+                    this.FilterResult.period.push(1);
+                }
+                else {
+                    this.FilterResult.period.push(0);
+                }
+            }
+            this.FilterResult.date = this.date_selected
+            for(var i = 0; i < this.requirement.length; i++) {
+                var flag = false
+                for(var j = 0; j < this.requirement_selected.length; j++) {
+                    if(this.requirement[i] == this.requirement_selected[j]) {
+                        flag = true
+                    }
+                }
+                if(flag == true) {
+                    this.FilterResult.classroom_feature.push(1);
+                }
+                else {
+                    this.FilterResult.classroom_feature.push(0);
+                }
+            }
+            this.FilterResult.teaching_building = this.building_selected
+            console.log(this.FilterResult)
+            
             /* api 发送数据
             //console.log(this.requirement);
             var requirement_selected2=Object.values(this.requirement_selected)
@@ -115,15 +158,6 @@ export default{
                 })
             //}
             */
-        },
-        reset(){
-            this.date_selected = "2023-06-01";
-            this.building_selected="";
-            this.class_number="";
-            this.class_type="";
-            this.FreeTime_selected=[];
-            this.requirement_selected="";
-            this.other_requirement="";
         }
     }
 }

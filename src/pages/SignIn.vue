@@ -17,6 +17,7 @@
                 let password = document.getElementsByName('password')[0].value;
                 console.log(`Password: ${password}`);
                 // 在这里可以将用户名和密码提交到服务器
+                this.$emit('GetChangeCheckDelete','CheckDelete')
             }
         }
     }

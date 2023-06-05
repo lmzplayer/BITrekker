@@ -1,7 +1,7 @@
 <template>
     <div>
         <div :class="ManagerFun" id="ManagerPage" v-if="ManagerFun == 'SignIn'">
-            <SignIn></SignIn>
+            <SignIn @GetChangeCheckDelete="ChangeCheckDelete"></SignIn>
         </div>
         <div :class="ManagerFun" id="ManagerPage" v-else-if="ManagerFun == 'CheckDelete'">
             <CheckDelete></CheckDelete>
@@ -10,7 +10,7 @@
             <RecycleBin></RecycleBin>
         </div>
         <div :class="ManagerFun" id="ManagerPage" v-else-if="ManagerFun == 'AddEdit'">
-            <AddEdit></AddEdit>
+            <AddEdit @GetChangeCheckDelete="ChangeCheckDelete"></AddEdit>
         </div>
     </div>
 </template>
@@ -33,7 +33,13 @@
                 
             }
         },
-        props: ['ManagerFun']
+        props: ['ManagerFun'],
+        methods: {
+            ChangeCheckDelete(NextFun) {
+                console.log(NextFun)
+                this.$emit('GetFun',NextFun)
+            }
+        }
     }
 </script>
 

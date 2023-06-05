@@ -6,7 +6,7 @@
                 <UserPage v-bind:UserFun="UserFun"></UserPage>
             </div>
             <div :class="Page" id="App" v-else-if="Page == 'Manager'">
-                <ManagerPage v-bind:ManagerFun="ManagerFun"></ManagerPage>
+                <ManagerPage v-bind:ManagerFun="ManagerFun" @GetFun="ChangeFun"></ManagerPage>
             </div>
         </div>
         <BottomBar v-bind:Page="Page" v-bind:ManagerFun="ManagerFun" v-bind:UserFun="UserFun" @GetFun="ChangeFun"></BottomBar>
@@ -16,11 +16,7 @@
 <script>
     import UserPage from './pages/UserPage'
     import ManagerPage from './pages/ManagerPage'
-    import AddEdit from './pages/AddEdit'
     import BottomBar from './components/BottomBar'
-    import ManagerSelect from './components/ManagerSelect'
-    import UserSelect from './components/UserSelect'
-    import MyBody from './components/MyBody'
     import MyHeader from './components/MyHeader'
     export default {
         name:'App',
@@ -35,10 +31,6 @@
             UserPage,
             ManagerPage,
             BottomBar,
-            MyBody,
-            AddEdit,
-            ManagerSelect,
-            UserSelect,
             MyHeader
         },
         methods: {
@@ -53,6 +45,7 @@
                 }
             },
             ChangeFun(NowFun) {
+                console.log('App')
                 console.log(NowFun)
                 if (NowFun == 'Check' || NowFun == 'Map') {
                     this.UserFun = NowFun
