@@ -1,20 +1,29 @@
 <template>
     <div>
-        <UserSelect v-bind:NowFun="NowFun"></UserSelect>
+        <UserSelect v-bind:NowFun="NowFun" @GetUserCheckData="TransferUserCheckData"></UserSelect>
+        <MyBody v-bind:UserCheckData="UserCheckData" v-bind:NowFun="NowFun"></MyBody>
     </div>
     
 </template>
 
 <script>
     import UserSelect from '../components/UserSelect'
+    import MyBody from '../components/MyBody'
     export default {
         name:'UserCheck',
         components:{
-            UserSelect
+            UserSelect,
+            MyBody
         },
         data() {
             return {
-                NowFun: 'UserCheck'
+                NowFun: 'UserCheck',
+                UserCheckData: []
+            }
+        },
+        methods: {
+            TransferUserCheckData(UserCheckData) {
+                this.UserCheckData = UserCheckData
             }
         }
     }

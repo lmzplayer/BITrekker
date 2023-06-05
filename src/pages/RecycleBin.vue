@@ -1,7 +1,7 @@
 <template>
     <div>
-        <UserSelect v-bind:NowFun="NowFun"></UserSelect>
-        <MyBody></MyBody>
+        <UserSelect v-bind:NowFun="NowFun" @GetRecycleBinData="TransferRecycleBinData"></UserSelect>
+        <MyBody v-bind:RecycleBinData="RecycleBinData" v-bind:NowFun="NowFun"></MyBody>
     </div>
     
 </template>
@@ -18,7 +18,13 @@
         },
         data() {
             return {
-                NowFun: 'RecycleBin'
+                NowFun: 'RecycleBin',
+                RecycleBinData: []
+            }
+        },
+        methods: {
+            TransferRecycleBinData(RecycleBinData) {
+                this.RecycleBinData = RecycleBinData
             }
         }
     }

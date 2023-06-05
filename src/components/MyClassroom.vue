@@ -28,12 +28,11 @@
 <script>
 import editicon from '@/assets/editicon.vue'
 export default {
-    props: ['info', 'index'],
+    props: ['info', 'index','adim'],
     emits: ['checkChange'],
     components: { editicon },
     data() {
         return {
-            adim: false,
             is_checked: false,
             global_features: [
                 "空调可调节", "离水房进", "插座多"
