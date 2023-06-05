@@ -1,7 +1,7 @@
 <template>
     <div>
         <UserSelect v-bind:NowFun="NowFun" @GetRecycleBinData="TransferRecycleBinData"></UserSelect>
-        <MyBody v-bind:RecycleBinData="RecycleBinData" v-bind:NowFun="NowFun"></MyBody>
+        <MyBody v-bind:classrooms="RecycleBinData" v-bind:Recovery="Recovery" v-bind:NowFun="NowFun" @sendOver="FinishRecover"></MyBody>
     </div>
     
 </template>
@@ -25,7 +25,11 @@
         methods: {
             TransferRecycleBinData(RecycleBinData) {
                 this.RecycleBinData = RecycleBinData
+            },
+            FinishRecover() {
+                this.$emit('Recovered')
             }
-        }
+        },
+        props: ['Recovery']
     }
 </script>

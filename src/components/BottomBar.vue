@@ -6,11 +6,10 @@
         </div>
         <div id='BottomBar' v-else-if="Page == 'Manager' && ManagerFun == 'CheckDelete'">
             <button v-on:click="ChangeAddEdit">新增</button>
-            <button>删除</button>
+            <button v-on:click="DeleteClassRoom">删除</button>
         </div>
         <div id='BottomBar' v-else-if="Page == 'Manager' && ManagerFun == 'RecycleBin'">
-            <button>恢复</button>
-            <button>永久删除</button>
+            <button v-on:click="RecoverClassRoom">恢复</button>
         </div>
     </div>
 </template>
@@ -27,6 +26,14 @@
             },
             ChangeAddEdit() {
                 this.$emit('GetFun','AddEdit')
+            },
+            DeleteClassRoom() {
+                console.log("I want to delete")
+                this.$emit('DeleteClassRoom')
+            },
+            RecoverClassRoom() {
+                console.log("I want to recover")
+                this.$emit('RecoverClassRoom')
             }
         },
         props: ['Page', 'UserFun', 'ManagerFun']

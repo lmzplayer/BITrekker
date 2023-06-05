@@ -6,10 +6,10 @@
                 <UserPage v-bind:UserFun="UserFun"></UserPage>
             </div>
             <div :class="Page" id="App" v-else-if="Page == 'Manager'">
-                <ManagerPage v-bind:ManagerFun="ManagerFun" @GetFun="ChangeFun"></ManagerPage>
+                <ManagerPage v-bind:ManagerFun="ManagerFun" @RecoverFinish="ChangeRecover" @DeleteFinish="ChangeDelete" @GetFun="ChangeFun" v-bind:Delete="Delete" v-bind:Recovery="Recovery"></ManagerPage>
             </div>
         </div>
-        <BottomBar v-bind:Page="Page" v-bind:ManagerFun="ManagerFun" v-bind:UserFun="UserFun" @GetFun="ChangeFun"></BottomBar>
+        <BottomBar v-bind:Page="Page" v-bind:ManagerFun="ManagerFun" v-bind:UserFun="UserFun" @GetFun="ChangeFun" @DeleteClassRoom="GetDelete" @RecoverClassRoom="GetRecover"></BottomBar>
     </div>
 </template>
 
@@ -24,7 +24,9 @@
             return {
                 Page:'User',
                 UserFun:'Check',
-                ManagerFun:'SignIn'
+                ManagerFun:'SignIn',
+                Delete:false,
+                Recovery:false
             }
         },
         components:{
@@ -54,6 +56,18 @@
                     this.ManagerFun = NowFun
                 }
                 
+            },
+            GetDelete () {
+                this.Delete = true
+            },
+            GetRecover () {
+                this.Recovery = true
+            },
+            ChangeDelete() {
+                this.Delete = false
+            },
+            ChangeRecover () {
+                this.Recovery = false
             }
         }
     }

@@ -75,13 +75,108 @@
                 }
             }
         },
-        mounted() {
+        created() {
             /* api 获取 需求label
             axios.get("/web_data_test/get_label_liist").then(res=>{
                 console.log(res.data)
                 this.requirement = res.data
             })
             */
+            console.log(this.FreeTime_selected)
+            console.log(this.building_selected)
+            console.log(this.date_selected)
+            console.log(this.requirement_selected)
+            for(var i = 0; i < this.FreeTime.length; i++) {
+                this.FilterResult.period.push(1);
+            }
+            this.FilterResult.date = "2023-06-01"
+            for(var i = 0; i < this.requirement.length; i++) {
+                this.FilterResult.classroom_feature.push(1);
+            }
+            this.FilterResult.teaching_building = this.buildings
+            console.log(this.FilterResult)
+            var SendData = JSON.stringify(this.FilterResult)
+            console.log(SendData)
+            var ReceiveData = SendData;
+            //ReceiveData = getMainData(SendData)
+
+            //var ClassRoomData = JSON.parse(ReceiveData)
+            var ClassRoomData = [
+            {
+                "affiliated_teaching_building": "文萃楼",
+                "classroom_number": "B139",
+                "free_time": [
+                {
+                    "date": "2023-6-4",
+                    "detailed_time_period": [
+                    true, false, true, false, true
+                    ]
+                }
+                ],
+                "classroom_features": [
+                true,false,true
+                ],
+                "recommended": 0
+            },
+            {
+                "affiliated_teaching_building": "文萃楼",
+                "classroom_number": "B129",
+                "free_time": [
+                {
+                    "date": "2023-6-4",
+                    "detailed_time_period": [
+                    true, true, true, false, true
+                    ]
+                }
+                ],
+                "classroom_features": [
+                true,false,true
+                ],
+                "recommended": 0
+            },
+            {
+                "affiliated_teaching_building": "JOJO楼",
+                "classroom_number": "A119",
+                "free_time": [
+                {
+                    "date": "2023-6-4",
+                    "detailed_time_period": [
+                    true, true, true, false, true
+                    ]
+                }
+                ],
+                "classroom_features": [
+                true,true,true
+                ],
+                "recommended": 0
+            },
+            {
+                "affiliated_teaching_building": "韭菜楼",
+                "classroom_number": "P115",
+                "free_time": [
+                {
+                    "date": "2023-6-4",
+                    "detailed_time_period": [
+                    false, true, true, false, true
+                    ]
+                }
+                ],
+                "classroom_features": [
+                true,false,true
+                ],
+                "recommended": 0
+            }
+            ]
+            console.log(ClassRoomData)
+            if(this.NowFun == 'RecycleBin') {
+                this.$emit('GetRecycleBinData',ClassRoomData)
+            }
+            if(this.NowFun == 'CheckDelete') {
+                this.$emit('GetCheckDeleteData',ClassRoomData)
+            }
+            if(this.NowFun == 'UserCheck') {
+                this.$emit('GetUserCheckData',ClassRoomData)
+            }
         },
         props: ['NowFun'],
         methods:{
@@ -124,12 +219,22 @@
                 var SendData = JSON.stringify(this.FilterResult)
                 console.log(SendData)
                 var ReceiveData = SendData;
-                //ReceiveData = getMainData(SendData)
-
-                ReceiveData = [
+                /*
+                if(this.NowFun == 'RecycleBin') {
+                    ReceiveData = getRecycleData(SendData)
+                }
+                if(this.NowFun == 'CheckDelete') {
+                    ReceiveData = getDetailedData(SendData)
+                }
+                if(this.NowFun == 'UserCheck') {
+                    ReceiveData = getMainData(SendData)
+                }
+                var ClassRoomData = JSON.parse(ReceiveData)
+                */
+                var ClassRoomData = [
                 {
                     "affiliated_teaching_building": "文萃楼",
-                    "classroom_number": "B139",
+                    "classroom_number": "B140",
                     "free_time": [
                     {
                         "date": "2023-6-4",
@@ -192,13 +297,12 @@
                     "recommended": 0
                 }
                 ]
-
-                var ClassRoomData = JSON.parse(ReceiveData)
                 console.log(ClassRoomData)
                 if(this.NowFun == 'RecycleBin') {
                     this.$emit('GetRecycleBinData',ClassRoomData)
                 }
                 if(this.NowFun == 'CheckDelete') {
+                    console.log("Here")
                     this.$emit('GetCheckDeleteData',ClassRoomData)
                 }
                 if(this.NowFun == 'UserCheck') {

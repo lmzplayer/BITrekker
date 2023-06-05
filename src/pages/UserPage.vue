@@ -18,11 +18,6 @@
             UserCheck,
             UserMap
         },
-        data() {
-            return {
-                
-            }
-        },
         props: ['UserFun']
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <UserSelect v-bind:NowFun="NowFun" @GetUserCheckData="TransferUserCheckData"></UserSelect>
-        <MyBody v-bind:UserCheckData="UserCheckData" v-bind:NowFun="NowFun"></MyBody>
+        <MyBody v-bind:classrooms="UserCheckData" v-bind:NowFun="NowFun"></MyBody>
     </div>
     
 </template>

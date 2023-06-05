@@ -1,11 +1,11 @@
 <template>
     <div class="rectangle-container">
-        <label class="checkbox-container">
+        <label v-if="adim != 'UserCheck'" class="checkbox-container">
             <input type="checkbox" v-model="is_checked">
             <span class="checkmark"></span>
         </label>
         <div class="rectangle">
-            <editicon @click="jumpToEditPage" class="icon" />
+            <editicon v-if="adim == 'CheckDelete'" @click.native="jumpToEditPage" class="icon" />
             <div class="classroom-title">
                 <h2>{{ info.affiliated_teaching_building + info.classroom_number }}</h2>
                 <span></span>
@@ -24,25 +24,24 @@
         </div>
     </div>
 </template>
-  
+
 <script>
 import editicon from '@/assets/editicon.vue'
 export default {
-    props: ['info', 'index','adim'],
-    emits: ['checkChange'],
+    props: ['info', 'index', 'adim', 'is_checked'],
+    emit: ['jumpToEditPageB'],
     components: { editicon },
     data() {
         return {
-            is_checked: false,
             global_features: [
                 "空调可调节", "离水房进", "插座多"
             ]
         }
     },
-    method: {
+    methods: {
         jumpToEditPage() {
-            console.log("Hi,there!")
-            this.adim = !this.adim
+            console.log("classroom gets info" + JSON.stringify(this.info))
+            this.$emit('jumpToEditPageB', this.info)
         }
     },
     computed: {
@@ -52,16 +51,10 @@ export default {
         filteredFeatures() {
             return this.global_features.filter((value, index) => this.info.classroom_features[index]);
         }
-    },
-    watch: {
-        is_checked(new_is_checked) {
-            console.log(new_is_checked)
-            this.$emit('checkChange', new_is_checked, this.index)
-        }
     }
 }
 </script>
-  
+
 <style>
 .checkbox-container {
     position: relative;
