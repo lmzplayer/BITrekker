@@ -9,14 +9,14 @@ if (process.env.NODE_ENV === 'production') {
   /*第二层if，根据.env文件中的VUE_APP_FLAG判断是生产环境还是测试环境*/
   if (process.env.VUE_APP_FLAG === 'pro') {
     //production 生产环境
-    axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/2691923-0-default';
   } else {
     //test 测试环境
-    axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/2691923-0-default';
   }
 } else {
   //dev 开发环境
-  axios.defaults.baseURL = 'http://localhost:8080';
+  axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/2691923-0-default';
 }
 
 // 响应拦截器

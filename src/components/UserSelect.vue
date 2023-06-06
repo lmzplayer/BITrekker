@@ -83,10 +83,7 @@
                 this.requirement = res.data
             })
             */
-            console.log(this.FreeTime_selected)
-            console.log(this.building_selected)
-            console.log(this.date_selected)
-            console.log(this.requirement_selected)
+            console.log("我在这里！")
             for(var i = 0; i < this.FreeTime.length; i++) {
                 this.FilterResult.period.push(1);
             }
@@ -94,99 +91,26 @@
             for(var i = 0; i < this.requirement.length; i++) {
                 this.FilterResult.classroom_feature.push(1);
             }
-            this.FilterResult.teaching_building = this.buildings
             console.log(this.FilterResult)
-            var SendData = JSON.stringify(this.FilterResult)
-            console.log(SendData)
-            var ReceiveData = SendData;
-            /*
+            console.log(this.NowFun)
             if(this.NowFun == 'RecycleBin') {
-                ReceiveData = getRecycleData(SendData)
+                let ReceiveData = getRecycleData(this.FilterResult)
+                this.$emit('GetRecycleBinData',ReceiveData)
             }
             if(this.NowFun == 'CheckDelete') {
-                ReceiveData = getDetailedData(SendData)
+                let ReceiveData = getDetailedData(this.FilterResult)
+                this.$emit('GetCheckDeleteData',ReceiveData)
             }
             if(this.NowFun == 'UserCheck') {
-                ReceiveData = getMainData(SendData)
-            }
-            var ClassRoomData = JSON.parse(ReceiveData)
-            */
-            //var ClassRoomData = JSON.parse(ReceiveData)
-            var ClassRoomData = [
-            {
-                "affiliated_teaching_building": "文萃楼",
-                "classroom_number": "B139",
-                "free_time": [
-                {
-                    "date": "2023-06-04",
-                    "detailed_time_period": [
-                    true, false, true, false, true
-                    ]
+                let ReceiveData = getMainData(this.FilterResult)
+                console.log("接收到数据")
+                const res = ReceiveData.then(res =>{
+                    console.log(res)
+                    this.$emit('GetUserCheckData',res)
                 }
-                ],
-                "classroom_features": [
-                true,false,true
-                ],
-                "recommended": 0
-            },
-            {
-                "affiliated_teaching_building": "文萃楼",
-                "classroom_number": "B129",
-                "free_time": [
-                {
-                    "date": "2023-06-04",
-                    "detailed_time_period": [
-                    true, true, true, false, true
-                    ]
-                }
-                ],
-                "classroom_features": [
-                true,false,true
-                ],
-                "recommended": 0
-            },
-            {
-                "affiliated_teaching_building": "JOJO楼",
-                "classroom_number": "A119",
-                "free_time": [
-                {
-                    "date": "2023-06-04",
-                    "detailed_time_period": [
-                    true, true, true, false, true
-                    ]
-                }
-                ],
-                "classroom_features": [
-                true,true,true
-                ],
-                "recommended": 0
-            },
-            {
-                "affiliated_teaching_building": "韭菜楼",
-                "classroom_number": "P115",
-                "free_time": [
-                {
-                    "date": "2023-06-04",
-                    "detailed_time_period": [
-                    false, true, true, false, true
-                    ]
-                }
-                ],
-                "classroom_features": [
-                true,false,true
-                ],
-                "recommended": 0
-            }
-            ]
-            console.log(ClassRoomData)
-            if(this.NowFun == 'RecycleBin') {
-                this.$emit('GetRecycleBinData',ClassRoomData)
-            }
-            if(this.NowFun == 'CheckDelete') {
-                this.$emit('GetCheckDeleteData',ClassRoomData)
-            }
-            if(this.NowFun == 'UserCheck') {
-                this.$emit('GetUserCheckData',ClassRoomData)
+                )
+                console.log(res)
+                
             }
         },
         props: ['NowFun'],
@@ -227,136 +151,27 @@
                 }
                 this.FilterResult.teaching_building = this.building_selected
                 console.log(this.FilterResult)
-                var SendData = JSON.stringify(this.FilterResult)
-                console.log(SendData)
-                var ReceiveData = SendData;
-                /*
+                console.log(this.FilterResult)
+                console.log(this.NowFun)
                 if(this.NowFun == 'RecycleBin') {
-                    ReceiveData = getRecycleData(SendData)
+                    let ReceiveData = getRecycleData(this.FilterResult)
+                    this.$emit('GetRecycleBinData',ReceiveData)
                 }
                 if(this.NowFun == 'CheckDelete') {
-                    ReceiveData = getDetailedData(SendData)
+                    let ReceiveData = getDetailedData(this.FilterResult)
+                    this.$emit('GetCheckDeleteData',ReceiveData)
                 }
                 if(this.NowFun == 'UserCheck') {
-                    ReceiveData = getMainData(SendData)
-                }
-                var ClassRoomData = JSON.parse(ReceiveData)
-                */
-                var ClassRoomData = [
-                {
-                    "affiliated_teaching_building": "文萃楼",
-                    "classroom_number": "B140",
-                    "free_time": [
-                    {
-                        "date": "2023-6-4",
-                        "detailed_time_period": [
-                        true, false, true, false, true
-                        ]
+                    let ReceiveData = getMainData(this.FilterResult)
+                    console.log("接收到数据")
+                    const res = ReceiveData.then(res =>{
+                        console.log(res)
+                        this.$emit('GetUserCheckData',res)
                     }
-                    ],
-                    "classroom_features": [
-                    true,false,true
-                    ],
-                    "recommended": 0
-                },
-                {
-                    "affiliated_teaching_building": "文萃楼",
-                    "classroom_number": "B129",
-                    "free_time": [
-                    {
-                        "date": "2023-6-4",
-                        "detailed_time_period": [
-                        true, true, true, false, true
-                        ]
-                    }
-                    ],
-                    "classroom_features": [
-                    true,false,true
-                    ],
-                    "recommended": 0
-                },
-                {
-                    "affiliated_teaching_building": "JOJO楼",
-                    "classroom_number": "A119",
-                    "free_time": [
-                    {
-                        "date": "2023-6-4",
-                        "detailed_time_period": [
-                        true, true, true, false, true
-                        ]
-                    }
-                    ],
-                    "classroom_features": [
-                    true,true,true
-                    ],
-                    "recommended": 0
-                },
-                {
-                    "affiliated_teaching_building": "韭菜楼",
-                    "classroom_number": "P115",
-                    "free_time": [
-                    {
-                        "date": "2023-6-4",
-                        "detailed_time_period": [
-                        false, true, true, false, true
-                        ]
-                    }
-                    ],
-                    "classroom_features": [
-                    true,false,true
-                    ],
-                    "recommended": 0
+                    )
+                    console.log(res)
+                    
                 }
-                ]
-                console.log(ClassRoomData)
-                if(this.NowFun == 'RecycleBin') {
-                    this.$emit('GetRecycleBinData',ClassRoomData)
-                }
-                if(this.NowFun == 'CheckDelete') {
-                    console.log("Here")
-                    this.$emit('GetCheckDeleteData',ClassRoomData)
-                }
-                if(this.NowFun == 'UserCheck') {
-                    this.$emit('GetUserCheckData',ClassRoomData)
-                }
-                /* api 发送数据
-                //console.log(this.requirement);
-                var requirement_selected2=Object.values(this.requirement_selected)
-                //console.log(requirement_selected2)
-                var requirement_selected3=[]
-                for (var i=0;i<this.requirement.length;i++){
-                    if (requirement_selected2.includes(this.requirement[i])){
-                        requirement_selected3.push('true')
-                    }
-                    else{
-                        requirement_selected3.push('false')
-                    }
-                }
-                //console.log(requirement_selected3)
-
-                var FreeTime_selected2=Object.values(this.FreeTime_selected)
-
-                //if (checkNull){
-                //    alert()
-                //}
-                //else{
-                    axios.get("/web_data_test/edit_classroom",{
-                        params:{
-                            affiliated_teaching_building: this.building_selected,
-                            classroom_id: this.class_number,
-                            classroom_name: "6",
-                            free_time: {
-                                date: this.date_selected,
-                                time: FreeTime_selected2,
-                            },
-                            classroom_features: requirement_selected3,
-                            recommended: 0
-                        }
-                    }).then(res=>{
-                        console.log(res.data)
-                    })
-                //}
-                */
             }
         }
     }

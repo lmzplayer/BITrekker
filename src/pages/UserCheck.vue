@@ -24,6 +24,7 @@
         methods: {
             TransferUserCheckData(UserCheckData) {
                 this.UserCheckData = UserCheckData
+                console.log("教室数据：  " + UserCheckData[0])
             }
         }
     }

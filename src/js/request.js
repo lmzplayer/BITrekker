@@ -14,7 +14,7 @@ export const getMainData = (param) => get('/web_data_test/get_main_data', param)
 
 //==enquire_or_delete_classroom
 export const getSelectClassroom = () => get('/html_control/select_classroom')
-export const getDetailedData = getMainData
+export const getDetailedData = (param) => get('/web_data_test/get_detailed_data', param)
 export const postDeleteClassroom = (param) => post('/web_data_test/delete_classroom', param)
 //==login
 export const getAdim = (param) => get('/web_data_test/administrator', param)
@@ -27,7 +27,7 @@ export const getEditClassroom = (param) => get('/web_data_test/edit_classroom', 
 //==recycle_bin
 export const getRecycle = () => get('/html_control/recycle')
 export const getRecycleLabelLiist = () => get('/web_data_test/get_recycle_label_list')
-export const getRecycleData = getMainData
+export const getRecycleData = (param) => get('/web_data_test/get_recycle_data', param)
 export const postRecoverClassroom = () => post('/web_data_test/recovery_classroom', param)
 
 //=test

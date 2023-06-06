@@ -7,14 +7,14 @@
         <div class="rectangle">
             <editicon v-if="adim == 'CheckDelete'" @click.native="jumpToEditPage" class="icon" />
             <div class="classroom-title">
-                <h2>{{ info.affiliated_teaching_building + info.classroom_number }}</h2>
+                <h2>{{ info.affiliated_teaching_building + info.classroom_id }}</h2>
                 <span></span>
-                <h3>{{ info.classroom_number }}</h3>
+                <h3>{{ info.classroom_id }}</h3>
             </div>
             <div class="classroom-time">
                 <span>
                     空闲时间：
-                    <span v-for="(time, index) in filteredTime" :key="time">第{{ time }}节{{ index == filteredTime.length - 1
+                    <span v-for="(time, index) in filteredTime" :key="time">第{{ time + 1 }}节{{ index == filteredTime.length - 1
                         ? '。' : '，' }}</span>
                 </span>
             </div>
