@@ -9,6 +9,7 @@
 </template>
 
 <script>
+    import {getAdim} from '../js/request.js'
 
     export default {
         name:'SignIn',
@@ -17,7 +18,16 @@
                 let password = document.getElementsByName('password')[0].value;
                 console.log(`Password: ${password}`);
                 // 在这里可以将用户名和密码提交到服务器
-                this.$emit('GetChangeCheckDelete','CheckDelete')
+
+                // let xhr = getAdim(password);
+                // xhr.onreadystatechange = function () {
+                //     if (xhr.readyState === 4 && xhr.status === 200) {
+                            this.$emit('GetChangeCheckDelete', 'CheckDelete');
+                //     }
+                //     else {
+                //         console.log("Sign in failed!")
+                //     }
+                // }
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="PageUser">
         <div :class="UserFun" id="UserPage" v-if="UserFun == 'Check'">
             <UserCheck></UserCheck>
         </div>
@@ -23,5 +23,8 @@
 </script>
 
 <style>
-
+    .PageUser {
+        position: relative;
+        z-index: 1;
+    }
 </style>

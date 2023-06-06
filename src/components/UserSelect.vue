@@ -49,8 +49,9 @@
 </template>
 
 <script>
-    import axios from 'axios';
     import {getMainData} from '../js/request.js'
+    import {getDetailedData} from '../js/request.js'
+    import {getRecycleData} from '../js/request.js'
 
     export default{
 
@@ -98,8 +99,18 @@
             var SendData = JSON.stringify(this.FilterResult)
             console.log(SendData)
             var ReceiveData = SendData;
-            //ReceiveData = getMainData(SendData)
-
+            /*
+            if(this.NowFun == 'RecycleBin') {
+                ReceiveData = getRecycleData(SendData)
+            }
+            if(this.NowFun == 'CheckDelete') {
+                ReceiveData = getDetailedData(SendData)
+            }
+            if(this.NowFun == 'UserCheck') {
+                ReceiveData = getMainData(SendData)
+            }
+            var ClassRoomData = JSON.parse(ReceiveData)
+            */
             //var ClassRoomData = JSON.parse(ReceiveData)
             var ClassRoomData = [
             {
@@ -107,7 +118,7 @@
                 "classroom_number": "B139",
                 "free_time": [
                 {
-                    "date": "2023-6-4",
+                    "date": "2023-06-04",
                     "detailed_time_period": [
                     true, false, true, false, true
                     ]
@@ -123,7 +134,7 @@
                 "classroom_number": "B129",
                 "free_time": [
                 {
-                    "date": "2023-6-4",
+                    "date": "2023-06-04",
                     "detailed_time_period": [
                     true, true, true, false, true
                     ]
@@ -139,7 +150,7 @@
                 "classroom_number": "A119",
                 "free_time": [
                 {
-                    "date": "2023-6-4",
+                    "date": "2023-06-04",
                     "detailed_time_period": [
                     true, true, true, false, true
                     ]
@@ -155,7 +166,7 @@
                 "classroom_number": "P115",
                 "free_time": [
                 {
-                    "date": "2023-6-4",
+                    "date": "2023-06-04",
                     "detailed_time_period": [
                     false, true, true, false, true
                     ]

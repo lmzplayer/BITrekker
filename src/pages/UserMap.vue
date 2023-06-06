@@ -28,7 +28,8 @@
             url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
             marker: L.latLng(39.731, 116.166),
-            text: 'this is a marker'
+            text: 'this is a marker',
+            worldCopyJump: true
             }
         }
     }
@@ -43,6 +44,10 @@
     }
 
     #map {
-        height: 100%;
+        height: 80%;
+    }
+
+    .vue_leaflet {
+        z-index: 2;
     }
 </style>

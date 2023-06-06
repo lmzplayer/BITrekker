@@ -52,10 +52,18 @@
         background-image: url(../assets/header.png);
         background-size: 100% 100%;
     }
+    #button {
+        height: 30px;
+        display: flex;
+    }
     #buttons {
+        height: 30px;
         position: absolute;
         right: 0;
         z-index: 10;
+        flex-direction: row;
+        align-items: center;
+        width: 200px;
     }
     #gear {
         width:30px;
@@ -74,9 +82,11 @@
     }
     #button2 {
         height:30px;
+        width: 30%;
         border: none;
     }
     #button3 {
+        width: 30%;
         height:30px;
         border-top: none;
         border-bottom: none;
