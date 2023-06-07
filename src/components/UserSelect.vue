@@ -52,7 +52,6 @@
     import {getMainData} from '../js/request.js'
     import {getDetailedData} from '../js/request.js'
     import {getRecycleData} from '../js/request.js'
-    import {newaxios} from '../js/newaxios'
 
     export default{
 
@@ -78,7 +77,6 @@
             }
         },
         created() {
-            newaxios()
             /* api 获取 需求label
             axios.get("/web_data_test/get_label_liist").then(res=>{
                 console.log(res.data)
@@ -91,7 +89,7 @@
             }
             this.FilterResult.date = "2023-06-01"
             for(var i = 0; i < this.requirement.length; i++) {
-                this.FilterResult.classroom_feature.push(1);
+                this.FilterResult.classroom_feature.push(0);
             }
             this.FilterResult.teaching_building = this.buildings
             console.log(this.FilterResult)
