@@ -1,9 +1,9 @@
 import axios from 'axios';
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 50000;
 axios.defaults.withCredentials = true;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
-var url = 'http://10.194.146.69'
+var url = 'http://localhost:8000'
 //这里应该是后端对应的端口
 //但是我不知道后端是什么端口
 if (process.env.NODE_ENV === 'production') {
@@ -26,6 +26,7 @@ axios.interceptors.response.use(
       // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
       // 否则的话抛出错误
       if (response.status === 200) {
+        console.log("response = " + response.data)
         return Promise.resolve(response);
       } else {
         return Promise.reject(response);
@@ -97,7 +98,8 @@ export function get(url, params = {}) {
   
   export function post(url, data = {}) {
     return new Promise((resolve, reject) => {
-      console.log("POST   " + data)
+
+      console.log("POST_data=" + JSON.stringify(data))
       axios.post(url, data)
         .then(response => {
 

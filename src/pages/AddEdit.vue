@@ -18,11 +18,21 @@
             </el-col>
             <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
         </el-row>
+
+        <el-row :gutter="20">
+            <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+            <el-col :span="6"><div class="grid-content ep-bg-purple" />教室名称：</el-col>
+            <el-col :span="6"><div class="grid-content ep-bg-purple" />
+                <el-input v-model="select_form.classroom_name" placeholder="Type something"/>
+            </el-col>
+            <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+        </el-row>
+
         <el-row :gutter="20">
             <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
             <el-col :span="6"><div class="grid-content ep-bg-purple" />教室编号：</el-col>
             <el-col :span="6"><div class="grid-content ep-bg-purple" />
-                <el-input v-model="select_form.classroom_number" placeholder="Type something"/>
+                <el-input v-model="select_form.classroom_id" placeholder="Type something"/>
             </el-col>
             <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
         </el-row>
@@ -75,17 +85,18 @@
         name:"AddEdit",
         data(){
             return{
-                buildings: ["工训楼" ,"文萃楼" ,"理学楼" ,"综合教学楼" ,"理科教学楼" ],
+                buildings: ["综合教学楼B" ,"文萃楼" ,"综合教学楼A" ,"理科教学楼" ],
                 FreeTime:['第1节','第2节','第3节','第4节','第5节'],
                 requirement:['插座多','离水房近','离女厕近','离男厕近','空调可调节'],
                 temp_detailed_time_period:[],
                 temp_classroom_features:[],
                 select_form:{ 
                     affiliated_teaching_building:'', 
-                    classroom_number:'',
+                    classroom_id:'',
+                    classroom_name:'',
                     free_time:{
                         date:'2023-06-01',
-                        detailed_time_period:[]
+                        time:[]
                     },
                     classroom_features:[],
                     other_requirement:'',
@@ -104,24 +115,29 @@
             })
             */
             //将EditMsg内容赋值到输入框中
-            this.temp_detailed_time_period=[]
-            this.temp_classroom_features=[]
-            this.select_form.affiliated_teaching_building=this.EditMsg.affiliated_teaching_building
-            this.select_form.classroom_number=this.EditMsg.classroom_number
-            this.select_form.free_time.date=this.EditMsg.free_time[0].date
-            console.log("show date got:" + this.EditMsg.free_time[0].date)
-            this.select_form.other_requirement=this.EditMsg.recommended
+            if(JSON.stringify(this.EditMsg) != '{}') {
+                    console.log("开始编辑！")
+                    this.temp_detailed_time_period=[]
+                    this.temp_classroom_features=[]
+                    this.select_form.affiliated_teaching_building=this.EditMsg.affiliated_teaching_building
+                    this.select_form.classroom_name=this.EditMsg.classroom_name
+                    this.select_form.classroom_id=this.EditMsg.classroom_id
+                    this.select_form.free_time.date=this.EditMsg.free_time.date
+                    console.log("show date got:" + this.EditMsg.free_time.date)
+                    this.select_form.other_requirement=this.EditMsg.recommended
 
-            for (var i=0;i<this.EditMsg.free_time[0].detailed_time_period.length;i++){
-                if (this.EditMsg.free_time[0].detailed_time_period[i] == true){
-                    this.temp_detailed_time_period.push(this.FreeTime[i])
-                }
+                    for (var i=0;i<this.EditMsg.free_time.detailed_time_period.length;i++){
+                        if (this.EditMsg.free_time.detailed_time_period[i] == true){
+                            this.temp_detailed_time_period.push(this.FreeTime[i])
+                        }
+                    }
+                    for (var i=0;i<this.EditMsg.classroom_features.length;i++){
+                        if (this.EditMsg.classroom_features[i] == true){
+                            this.temp_classroom_features.push(this.requirement[i])
+                        }
+                    }
             }
-            for (var i=0;i<this.EditMsg.classroom_features.length;i++){
-                if (this.EditMsg.classroom_features[i] == true){
-                    this.temp_classroom_features.push(this.requirement[i])
-                }
-            }
+            
         },
         methods:{
             send(){
@@ -144,10 +160,10 @@
                         }
                     }
                     if(flag == true) {
-                        this.select_form.free_time.detailed_time_period.push(true);
+                        this.select_form.free_time.time.push(true);
                     }
                     else {
-                        this.select_form.free_time.detailed_time_period.push(false);
+                        this.select_form.free_time.time.push(false);
                     }
                 }
                 for(var i = 0; i < this.requirement.length; i++) {
@@ -165,7 +181,7 @@
                     }
                 }
                 console.log("AddEdit send JSON : " + JSON.stringify(this.select_form))
-                let xhr = getEditClassroom(JSON.stringify(this.select_form));
+                let xhr = getEditClassroom(this.select_form);
                 console.log("编辑教室")
                 this.$emit('GetChangeCheckDelete','CheckDelete')
                 /* api 发送数据
@@ -211,9 +227,10 @@
                 this.temp_detailed_time_period='',
                 this.temp_classroom_features='',
                 this.select_form.affiliated_teaching_building='',
-                this.select_form.classroom_number='',
+                this.select_form.classroom_id='',
+                this.select_form.classroom_name='',
                 this.select_form.free_time.date='2023-06-01',
-                this.select_form.free_time.detailed_time_period=[],
+                this.select_form.free_time.time=[],
                 this.select_form.classroom_features=[],
                 this.select_form.other_requirement=''
             }

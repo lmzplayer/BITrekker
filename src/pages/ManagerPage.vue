@@ -42,10 +42,13 @@
                 this.$emit('GetFun',NextFun)
             },
             GetDeleted() {
+                console.log("收到")
                 this.$emit('DeleteFinish')
+                this.$emit('GetFun','CheckDelete')
             },
             GetRecovered() {
                 this.$emit('RecoverFinish')
+                this.$emit('GetFun','recycleBin')
             },
             TransferEdit(param) {
                 this.EditMsg = param

@@ -30,10 +30,12 @@
         methods: {
             TransferCheckDeleteData(CheckDeleteData) {
                 this.CheckDeleteData = CheckDeleteData
-                console.log(this.CheckDeleteData)
+                console.log("123456   " + this.CheckDeleteData)
             },
-            FinishDelete() {
+            FinishDelete(m) {
+                console.log(m)
                 this.$emit('Deleted')
+                this.NowFun = '1'
             },
             ChangeEdit(param) {
                 this.$emit('ToEdit',param)

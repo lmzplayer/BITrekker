@@ -53,6 +53,7 @@
                     this.UserFun = NowFun
                 }
                 else {
+                    console.log("删除过来的")
                     this.ManagerFun = NowFun
                 }
                 

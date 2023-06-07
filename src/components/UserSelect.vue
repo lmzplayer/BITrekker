@@ -43,6 +43,9 @@
             <el-col :span="4"><div class="grid-content ep-bg-purple" />
                 <el-button size="large" @click="send">确定</el-button>
             </el-col>
+            <el-col :span="4" v-if="this.NowFun == '1' || this.NowFun == 'CheckDelete'"><div class="grid-content ep-bg-purple" />
+                <el-button size="large" @click="update">更新数据库</el-button>
+            </el-col>
             <el-col :span="8"><div class="grid-content ep-bg-purple" /></el-col>
         </el-row>
     </div>
@@ -52,6 +55,7 @@
     import {getMainData} from '../js/request.js'
     import {getDetailedData} from '../js/request.js'
     import {getRecycleData} from '../js/request.js'
+    import {getUpdate} from '../js/request.js'
 
     export default{
 
@@ -60,7 +64,7 @@
             return{
                 date_selected:"2023-06-01", 
                 building_selected:'',  
-                buildings: ["工训楼" ,"文萃楼" ,"理学楼" ,"综合教学楼" ,"理科教学楼" ],
+                buildings: ["综合教学楼B" ,"文萃楼" ,"综合教学楼A" ,"理科教学楼" ],
                 class_number:'',
                 class_type:'',
                 FreeTime:['第1节','第2节','第3节','第4节','第5节'],
@@ -94,28 +98,84 @@
             this.FilterResult.teaching_building = this.buildings
             console.log(this.FilterResult)
             console.log(this.NowFun)
-            if(this.NowFun == 'RecycleBin') {
-                let ReceiveData = getRecycleData(JSON.string(this.FilterResult))
+            if(this.NowFun == 'RecycleBin' || this.NowFun == '0') {
+                let ReceiveData = getRecycleData(this.FilterResult)
                 console.log("接收到数据")
                 const res = ReceiveData.then(res =>{
                         console.log(res)
-                        this.$emit('GetUserCheckData',res)
+                        this.$emit('GetRecycleBinData',res)
                     }
                 )
                 console.log(res)
+                this.FilterResult.classroom_feature = []
+                this.FilterResult.period = []
             }
-            if(this.NowFun == 'CheckDelete') {
-                let ReceiveData = getDetailedData(JSON.stringify(this.FilterResult))
-                console.log("接收到数据")
+            if(this.NowFun == 'CheckDelete' || this.NowFun == '1') {
+                let ReceiveData = getDetailedData(this.FilterResult)
+                console.log("Check接收到数据")
                 const res = ReceiveData.then(res =>{
                         console.log(res)
-                        this.$emit('GetUserCheckData',res)
+                        this.$emit('GetCheckDeleteData',res)
                     }
                 )
                 console.log(res)
+                this.FilterResult.classroom_feature = []
+                this.FilterResult.period = []
             }
             if(this.NowFun == 'UserCheck') {
-                    let ReceiveData = getMainData(JSON.stringify(this.FilterResult))
+                let ReceiveData = getMainData(this.FilterResult)
+                console.log("接收到数据")
+                const res = ReceiveData.then(res =>{
+                        console.log(res)
+                        this.$emit('GetUserCheckData',res)
+                    }
+                )
+                console.log(res)
+                this.FilterResult.classroom_feature = []
+                this.FilterResult.period = []
+                
+            }
+        },
+        props: ['NowFun'],
+        watch: {
+            NowFun(newValue, oldValue) {
+                console.log("删除完毕/恢复完毕")
+                for(var i = 0; i < this.FreeTime.length; i++) {
+                    this.FilterResult.period.push(1);
+                }
+                this.FilterResult.date = "2023-06-01"
+                for(var i = 0; i < this.requirement.length; i++) {
+                    this.FilterResult.classroom_feature.push(0);
+                }
+                this.FilterResult.teaching_building = this.buildings
+                console.log(this.FilterResult)
+                console.log(this.NowFun)
+                if(newValue == 'RecycleBin' || newValue == '0') {
+                    let ReceiveData = getRecycleData(this.FilterResult)
+                    console.log("接收到数据")
+                    const res = ReceiveData.then(res =>{
+                            console.log(res)
+                            this.$emit('GetRecycleBinData',res)
+                        }
+                    )
+                    console.log(res)
+                    this.FilterResult.classroom_feature = []
+                    this.FilterResult.period = []
+                }
+                if(newValue == 'CheckDelete' || newValue == '1') {
+                    let ReceiveData = getDetailedData(this.FilterResult)
+                    console.log("Check接收到数据")
+                    const res = ReceiveData.then(res =>{
+                            console.log(res)
+                            this.$emit('GetCheckDeleteData',res)
+                        }
+                    )
+                    console.log(res)
+                    this.FilterResult.classroom_feature = []
+                    this.FilterResult.period = []
+                }
+                if(newValue == 'UserCheck') {
+                    let ReceiveData = getMainData(this.FilterResult)
                     console.log("接收到数据")
                     const res = ReceiveData.then(res =>{
                             console.log(res)
@@ -123,16 +183,24 @@
                         }
                     )
                     console.log(res)
-                
+                    this.FilterResult.classroom_feature = []
+                    this.FilterResult.period = []
+                    
+                }
             }
         },
-        props: ['NowFun'],
         methods:{
+            update() {
+                let xlr = getUpdate()
+            },
             send(){
                 console.log(this.FreeTime_selected)
                 console.log(this.building_selected)
                 console.log(this.date_selected)
                 console.log(this.requirement_selected)
+                console.log(this.FreeTime.length)
+                console.log(this.requirement.length)
+                var cnt = 0
                 for(var i = 0; i < this.FreeTime.length; i++) {
                     var flag = false
                     for(var j = 0; j < this.FreeTime_selected.length; j++) {
@@ -144,7 +212,14 @@
                         this.FilterResult.period.push(1);
                     }
                     else {
+                        cnt = cnt + 1
                         this.FilterResult.period.push(0);
+                    }
+                }
+                if(cnt == this.FreeTime.length) {
+                    this.FilterResult.period = []
+                    for(var i = 0; i < this.FreeTime.length; i++) {
+                        this.FilterResult.period.push(1);
                     }
                 }
                 this.FilterResult.date = this.date_selected
@@ -163,38 +238,47 @@
                     }
                 }
                 this.FilterResult.teaching_building = this.building_selected
+                if(this.FilterResult.teaching_building.length == 0) {
+                    this.FilterResult.teaching_building = this.buildings
+                }
                 console.log(this.FilterResult)
                 console.log(this.FilterResult)
                 console.log(this.NowFun)
-                if(this.NowFun == 'RecycleBin') {
-                    let ReceiveData = getRecycleData(JSON.string(this.FilterResult))
+                if(this.NowFun == 'RecycleBin' || this.NowFun == '0') {
+                    let ReceiveData = getRecycleData(this.FilterResult)
                     console.log("接收到数据")
                     const res = ReceiveData.then(res =>{
                             console.log(res)
-                            this.$emit('GetUserCheckData',res)
+                            this.$emit('GetRecycleBinData',res)
                         }
                     )
                     console.log(res)
+                    this.FilterResult.classroom_feature = []
+                    this.FilterResult.period = []
                 }
-                if(this.NowFun == 'CheckDelete') {
-                    let ReceiveData = getDetailedData(JSON.stringify(this.FilterResult))
+                if(this.NowFun == 'CheckDelete' || this.NowFun == '1') {
+                    let ReceiveData = getDetailedData(this.FilterResult)
                     console.log("接收到数据")
                     const res = ReceiveData.then(res =>{
                             console.log(res)
-                            this.$emit('GetUserCheckData',res)
+                            this.$emit('GetCheckDeleteData',res)
                         }
                     )
                     console.log(res)
+                    this.FilterResult.classroom_feature = []
+                    this.FilterResult.period = []
                 }
                 if(this.NowFun == 'UserCheck') {
-                        let ReceiveData = getMainData(JSON.stringify(this.FilterResult))
-                        console.log("接收到数据")
-                        const res = ReceiveData.then(res =>{
-                                console.log(res)
-                                this.$emit('GetUserCheckData',res)
-                            }
-                        )
-                        console.log(res)
+                    let ReceiveData = getMainData(this.FilterResult)
+                    console.log("接收到数据")
+                    const res = ReceiveData.then(res =>{
+                            console.log(res)
+                            this.$emit('GetUserCheckData',res)
+                        }
+                    )
+                    console.log(res)
+                    this.FilterResult.classroom_feature = []
+                    this.FilterResult.period = []
                     
                 }
             }

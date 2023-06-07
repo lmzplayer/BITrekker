@@ -20,7 +20,7 @@ export const postDeleteClassroom = (param) => post('/web_data_test/delete_classr
 export const getAdim = (param) => post('/web_data_test/administrator', param)
 export const getLogin = () => get('/html_control/login')
 //==edit_classroom
-export const getEditClassroomHtml = (object) => get('/html_control/edit_classroom', object)
+export const getEditClassroomHtml = (object) => get('/web_data_test/edit_classroom', object)
 export const getAddLabel = (param) => get('/web_data_test/add_label', param)
 export const getDelLabel = (param) => get('/web_data_test/del_label', param)
 export const getEditClassroom = (param) => post('/web_data_test/edit_classroom', param)

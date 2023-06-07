@@ -28,6 +28,7 @@
             },
             FinishRecover() {
                 this.$emit('Recovered')
+                this.NowFun = '0'
             }
         },
         props: ['Recovery']
