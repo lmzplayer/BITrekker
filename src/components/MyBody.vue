@@ -48,10 +48,10 @@ export default {
                 let dset = this.selected.map((value, index) => value ? this.classrooms[index] : -1).filter(index => index !== -1)
                 console.log("Body Recovery param" + dset)
                 for(i in dset){
-                    postDeleteClassroom({
+                    postDeleteClassroom(JSON.stringify({
                         affiliated_teaching_building : i.affiliated_teaching_building,
                         classroom_number : i.classroom_number
-                    })
+                    }))
                 }
                 this.$emit('sendOver')
             }
@@ -61,10 +61,10 @@ export default {
                 let dset = this.selected.map((value, index) => value ? this.classrooms[index] : -1).filter(index => index !== -1)
                 console.log("Body Recovery param" + dset)
                 for(i in dset){
-                    postRecoverClassroom({
+                    postRecoverClassroom(JSON.stringify({
                         affiliated_teaching_building : i.affiliated_teaching_building,
                         classroom_number : i.classroom_number
-                    })
+                    }))
                 }
                 this.$emit('sendOver')
             }

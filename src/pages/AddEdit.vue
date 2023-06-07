@@ -76,7 +76,7 @@
         data(){
             return{
                 buildings: ["工训楼" ,"文萃楼" ,"理学楼" ,"综合教学楼" ,"理科教学楼" ],
-                FreeTime:['第1节','第2节','第3节','第4节','第5节','第6节','第7节','第8节','第9节','第10节','第11节','第12节','第13节'],
+                FreeTime:['第1节','第2节','第3节','第4节','第5节'],
                 requirement:['插座多','离水房近','离女厕近','离男厕近','空调可调节'],
                 temp_detailed_time_period:[],
                 temp_classroom_features:[],
@@ -165,7 +165,7 @@
                     }
                 }
                 console.log("AddEdit send JSON : " + JSON.stringify(this.select_form))
-                let xhr = getEditClassroom(this.select_form);
+                let xhr = getEditClassroom(JSON.stringify(this.select_form));
                 console.log("编辑教室")
                 this.$emit('GetChangeCheckDelete','CheckDelete')
                 /* api 发送数据

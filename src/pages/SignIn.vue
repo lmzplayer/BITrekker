@@ -27,7 +27,7 @@
                 
                 // 在这里可以将用户名和密码提交到服务器
                 this.pass.password = password
-                let xhr = getAdim(this.pass);
+                let xhr = getAdim(JSON.stringify(this.pass));
                 this.$emit('GetChangeCheckDelete', 'CheckDelete');
             }
         }

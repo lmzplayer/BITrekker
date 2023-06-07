@@ -52,6 +52,7 @@
     import {getMainData} from '../js/request.js'
     import {getDetailedData} from '../js/request.js'
     import {getRecycleData} from '../js/request.js'
+    import {newaxios} from '../js/newaxios'
 
     export default{
 
@@ -63,7 +64,7 @@
                 buildings: ["工训楼" ,"文萃楼" ,"理学楼" ,"综合教学楼" ,"理科教学楼" ],
                 class_number:'',
                 class_type:'',
-                FreeTime:['第1节','第2节','第3节','第4节','第5节','第6节','第7节','第8节','第9节','第10节','第11节','第12节','第13节'],
+                FreeTime:['第1节','第2节','第3节','第4节','第5节'],
                 FreeTime_selected:[],
                 requirement:['插座多','离水房近','离女厕近','离男厕近','空调可调节'],
                 requirement_selected:[],
@@ -77,6 +78,7 @@
             }
         },
         created() {
+            newaxios()
             /* api 获取 需求label
             axios.get("/web_data_test/get_label_liist").then(res=>{
                 console.log(res.data)
@@ -91,25 +93,38 @@
             for(var i = 0; i < this.requirement.length; i++) {
                 this.FilterResult.classroom_feature.push(1);
             }
+            this.FilterResult.teaching_building = this.buildings
             console.log(this.FilterResult)
             console.log(this.NowFun)
             if(this.NowFun == 'RecycleBin') {
-                let ReceiveData = getRecycleData(this.FilterResult)
-                this.$emit('GetRecycleBinData',ReceiveData)
-            }
-            if(this.NowFun == 'CheckDelete') {
-                let ReceiveData = getDetailedData(this.FilterResult)
-                this.$emit('GetCheckDeleteData',ReceiveData)
-            }
-            if(this.NowFun == 'UserCheck') {
-                let ReceiveData = getMainData(this.FilterResult)
+                let ReceiveData = getRecycleData(JSON.string(this.FilterResult))
                 console.log("接收到数据")
                 const res = ReceiveData.then(res =>{
-                    console.log(res)
-                    this.$emit('GetUserCheckData',res)
-                }
+                        console.log(res)
+                        this.$emit('GetUserCheckData',res)
+                    }
                 )
                 console.log(res)
+            }
+            if(this.NowFun == 'CheckDelete') {
+                let ReceiveData = getDetailedData(JSON.stringify(this.FilterResult))
+                console.log("接收到数据")
+                const res = ReceiveData.then(res =>{
+                        console.log(res)
+                        this.$emit('GetUserCheckData',res)
+                    }
+                )
+                console.log(res)
+            }
+            if(this.NowFun == 'UserCheck') {
+                    let ReceiveData = getMainData(JSON.stringify(this.FilterResult))
+                    console.log("接收到数据")
+                    const res = ReceiveData.then(res =>{
+                            console.log(res)
+                            this.$emit('GetUserCheckData',res)
+                        }
+                    )
+                    console.log(res)
                 
             }
         },
@@ -154,22 +169,34 @@
                 console.log(this.FilterResult)
                 console.log(this.NowFun)
                 if(this.NowFun == 'RecycleBin') {
-                    let ReceiveData = getRecycleData(this.FilterResult)
-                    this.$emit('GetRecycleBinData',ReceiveData)
-                }
-                if(this.NowFun == 'CheckDelete') {
-                    let ReceiveData = getDetailedData(this.FilterResult)
-                    this.$emit('GetCheckDeleteData',ReceiveData)
-                }
-                if(this.NowFun == 'UserCheck') {
-                    let ReceiveData = getMainData(this.FilterResult)
+                    let ReceiveData = getRecycleData(JSON.string(this.FilterResult))
                     console.log("接收到数据")
                     const res = ReceiveData.then(res =>{
-                        console.log(res)
-                        this.$emit('GetUserCheckData',res)
-                    }
+                            console.log(res)
+                            this.$emit('GetUserCheckData',res)
+                        }
                     )
                     console.log(res)
+                }
+                if(this.NowFun == 'CheckDelete') {
+                    let ReceiveData = getDetailedData(JSON.stringify(this.FilterResult))
+                    console.log("接收到数据")
+                    const res = ReceiveData.then(res =>{
+                            console.log(res)
+                            this.$emit('GetUserCheckData',res)
+                        }
+                    )
+                    console.log(res)
+                }
+                if(this.NowFun == 'UserCheck') {
+                        let ReceiveData = getMainData(JSON.stringify(this.FilterResult))
+                        console.log("接收到数据")
+                        const res = ReceiveData.then(res =>{
+                                console.log(res)
+                                this.$emit('GetUserCheckData',res)
+                            }
+                        )
+                        console.log(res)
                     
                 }
             }

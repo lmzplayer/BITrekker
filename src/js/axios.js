@@ -1,22 +1,23 @@
 import axios from 'axios';
 axios.defaults.timeout = 5000;
 axios.defaults.withCredentials = true;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
+var url = 'http://10.194.146.69'
 //这里应该是后端对应的端口
 //但是我不知道后端是什么端口
 if (process.env.NODE_ENV === 'production') {
   /*第二层if，根据.env文件中的VUE_APP_FLAG判断是生产环境还是测试环境*/
   if (process.env.VUE_APP_FLAG === 'pro') {
     //production 生产环境
-    axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/2691923-0-default';
+    axios.defaults.baseURL = url;
   } else {
     //test 测试环境
-    axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/2691923-0-default';
+    axios.defaults.baseURL = url;
   }
 } else {
   //dev 开发环境
-  axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/2691923-0-default';
+  axios.defaults.baseURL = url;
 }
 
 // 响应拦截器
@@ -96,8 +97,10 @@ export function get(url, params = {}) {
   
   export function post(url, data = {}) {
     return new Promise((resolve, reject) => {
+      console.log("POST   " + data)
       axios.post(url, data)
         .then(response => {
+
           resolve(response.data);
         }, err => {
           reject(err)
