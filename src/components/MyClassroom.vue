@@ -5,11 +5,7 @@
       <span class="checkmark"></span>
     </label>
     <div class="rectangle">
-      <editicon
-        v-if="adim == 'CheckDelete' || adim == '1'"
-        @click.native="jumpToEditPage"
-        class="icon"
-      />
+      <editicon v-if="adim == 'CheckDelete' || adim == '1'" @click.native="jumpToEditPage" class="icon" />
       <div class="classroom-title">
         <h2>{{ info.affiliated_teaching_building }}</h2>
         <span></span>
@@ -22,11 +18,9 @@
       <div class="classroom-time">
         <span>
           空闲时间：
-          <span v-for="(time, index) in filteredTime" :key="time"
-            >第{{ time + 1 }}节{{
-              index == filteredTime.length - 1 ? "。" : "，"
-            }}</span
-          >
+          <span v-for="(time, index) in filteredTime" :key="time">第{{ time + 1 }}节{{
+            index == filteredTime.length - 1 ? "。" : "，"
+          }}</span>
         </span>
       </div>
       <div class="classroom-features">
@@ -40,6 +34,7 @@
 
 <script>
 import editicon from "@/assets/editicon.vue";
+
 export default {
   props: ["info", "index", "adim"],
   emit: ["jumpToEditPageB", "checkChange"],
@@ -58,24 +53,29 @@ export default {
     };
   },
   methods: {
+
+    //跳转到新增编辑页面
     jumpToEditPage() {
-      console.log("classroom gets info" + JSON.stringify(this.info));
       this.$emit("jumpToEditPageB", this.info);
     },
+
+    //重置选择按钮
     resetIsCheck() {
       this.flag = true;
       this.is_checked = false;
     },
   },
   created() {
-    console.log("create stop " + this.flag);
+
   },
   computed: {
+
     filteredTime() {
       return this.info.free_time.detailed_time_period
         .map((value, index) => (value ? index : -1))
         .filter((index) => index !== -1);
     },
+
     filteredFeatures() {
       return this.global_features.filter(
         (value, index) => this.info.classroom_features[index]
@@ -83,6 +83,7 @@ export default {
     },
   },
   watch: {
+
     is_checked(_new) {
       if (this.flag == false) this.$emit("checkChange", this.index, _new);
       else this.flag = false;
@@ -120,7 +121,7 @@ export default {
   cursor: pointer;
 }
 
-.checkbox-container input[type="checkbox"]:checked + .checkmark {
+.checkbox-container input[type="checkbox"]:checked+.checkmark {
   background-color: gray;
 }
 

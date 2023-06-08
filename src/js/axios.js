@@ -3,9 +3,9 @@ axios.defaults.timeout = 50000;
 axios.defaults.withCredentials = true;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
+//后端对应的端口
 var url = 'http://localhost:8000'
-//这里应该是后端对应的端口
-//但是我不知道后端是什么端口
+
 if (process.env.NODE_ENV === 'production') {
   /*第二层if，根据.env文件中的VUE_APP_FLAG判断是生产环境还是测试环境*/
   if (process.env.VUE_APP_FLAG === 'pro') {

@@ -26,7 +26,7 @@ export const getDelLabel = (param) => get('/web_data_test/del_label', param)
 export const getEditClassroom = (param) => post('/web_data_test/edit_classroom', param)
 //==recycle_bin
 export const getRecycle = () => get('/html_control/recycle')
-export const getRecycleLabelLiist = () => get('/web_data_test/get_recycle_label_list')
+export const getRecycleLabelList = () => get('/web_data_test/get_recycle_label_list')
 export const getRecycleData = (param) => post('/web_data_test/get_recycle_data', param)
 export const postRecoverClassroom = () => post('/web_data_test/recovery_classroom', param)
 

@@ -10,21 +10,22 @@
 </template>
 
 <script>
-    import UserCheck from './UserCheck'
-    import UserMap from './UserMap'
-    export default {
-        name:'UserPage',
-        components: {
-            UserCheck,
-            UserMap
-        },
-        props: ['UserFun']
-    }
+import UserCheck from './UserCheck'
+import UserMap from './UserMap'
+
+export default {
+    name: 'UserPage',
+    components: {
+        UserCheck,
+        UserMap
+    },
+    props: ['UserFun']
+}
 </script>
 
 <style>
-    .PageUser {
-        position: relative;
-        z-index: 1;
-    }
+.PageUser {
+    position: relative;
+    z-index: 1;
+}
 </style>

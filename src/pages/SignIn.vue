@@ -9,70 +9,68 @@
 </template>
 
 <script>
-    import {getAdim} from '../js/request.js'
+import { getAdim } from '../js/request.js'
 
-    export default {
-        name:'SignIn',
-        data() {
-            return {
-                pass: {
-                    password:String
-                }
-            }
-        },
-        methods:{
-            submitForm() {
-                let password = document.getElementsByName('password')[0].value;
-                console.log(`Password: ${password}`);
-                
-                // 在这里可以将用户名和密码提交到服务器
-                this.pass.password = password
-                let xhr = getAdim(JSON.stringify(this.pass));
-                this.$emit('GetChangeCheckDelete', 'CheckDelete');
+export default {
+    name: 'SignIn',
+    data() {
+        return {
+            pass: {
+                password: String
             }
         }
+    },
+    methods: {
+
+        //将密码提交至服务器进行登录验证
+        submitForm() {
+            let password = document.getElementsByName('password')[0].value;
+            this.pass.password = password
+            let xhr = getAdim(JSON.stringify(this.pass));
+            this.$emit('GetChangeCheckDelete', 'CheckDelete');
+        }
     }
+}
 </script>
 
 <style>
-    .container {
-        border: 2px solid black;
-        width: 50%;
-        margin-top: 5%;
-        margin-left: 15%;
-        margin-right: 15%;
-        padding: 50px;
-    }
+.container {
+    border: 2px solid black;
+    width: 50%;
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 50px;
+}
 
-    .row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
-    .label {
-        flex: 1;
-        text-align: right;
-        margin-right: 10px;
-    }
+.label {
+    flex: 1;
+    text-align: right;
+    margin-right: 10px;
+}
 
-    .input {
-        flex: 2;
-        padding: 5px;
-    }
+.input {
+    flex: 2;
+    padding: 5px;
+}
 
-    .btn {
-        width: 100%;
-        padding: 10px;
-        background-color: white;
-        color: black;
-        border: none;
-        cursor: pointer;
-    }
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
 
-    .my-map-component {
-        width: 100%;
-        max-width: 1200px;
-        /* 设置组件最大宽度 */
-    }
+.my-map-component {
+    width: 100%;
+    max-width: 1200px;
+}
 </style>

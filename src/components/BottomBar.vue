@@ -30,55 +30,66 @@
 </template>
 
 <script>
-    export default {
-        name:'BottomBar',
-        methods: {
-            ChangeMap() {
-                this.$emit('GetFun','Map')
-            },
-            ChangeCheck() {
-                this.$emit('GetFun','Check')
-            },
-            ChangeAddEdit() {
-                this.$emit('GetFun','AddEdit')
-            },
-            DeleteClassRoom() {
-                console.log("I want to delete")
-                this.$emit('DeleteClassRoom')
-            },
-            RecoverClassRoom() {
-                console.log("I want to recover")
-                this.$emit('RecoverClassRoom')
-            }
+export default {
+    name: 'BottomBar',
+    methods: {
+
+        //跳转到地图页面
+        ChangeMap() {
+            this.$emit('GetFun', 'Map')
         },
-        props: ['Page', 'UserFun', 'ManagerFun']
-    }
+
+        //跳转到查询页面
+        ChangeCheck() {
+            this.$emit('GetFun', 'Check')
+        },
+
+        //跳转到新增编辑页面
+        ChangeAddEdit() {
+            this.$emit('GetFun', 'AddEdit')
+        },
+
+        //请求删除教室
+        DeleteClassRoom() {
+            this.$emit('DeleteClassRoom')
+        },
+
+        //请求恢复删除
+        RecoverClassRoom() {
+            this.$emit('RecoverClassRoom')
+        }
+    },
+    props: ['Page', 'UserFun', 'ManagerFun']
+}
 </script>
 
 <style>
-    .BottomBarContainer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 100;
-    }
-    .BottomBar {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-    button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+.BottomBarContainer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+}
 
-        border: 1px solid grey;
-        width: 100%;
-        float: left;
-        background-color: white;
-    }
-    .BottomBarSvg {
-        height: 36px;
-    }
+.BottomBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid grey;
+    width: 100%;
+    float: left;
+    background-color: white;
+}
+
+.BottomBarSvg {
+    height: 36px;
+}
 </style>
